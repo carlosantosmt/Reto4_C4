@@ -31,14 +31,14 @@ public class Client implements Serializable {
     @Column(unique=true, nullable = false)
     private Integer idClient;
     
-    @Column(length=250, nullable = false)
-    private String name;
     @Column(length=45, nullable = false)
     private String email;
-    @Column(nullable = false)
-    private Integer age;
     @Column(length=45, nullable = false)
     private String password;
+    @Column(length=250, nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private Integer age;
     
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
     @JsonIgnoreProperties("client")
@@ -52,12 +52,12 @@ public class Client implements Serializable {
         super();
     }   
 
-    public Client(Integer idClient, String name, String email, Integer age, String password, List<Message> messages, List<Reservation> reservations) {
+    public Client(Integer idClient, String email, String password, String name, Integer age, List<Message> messages, List<Reservation> reservations) {
         this.idClient = idClient;
-        this.name = name;
         this.email = email;
-        this.age = age;
         this.password = password;
+        this.name = name;
+        this.age = age;
         this.messages = messages;
         this.reservations = reservations;
     }
@@ -70,14 +70,6 @@ public class Client implements Serializable {
         this.idClient = idClient;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -86,20 +78,28 @@ public class Client implements Serializable {
         this.email = email;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public List<Message> getMessages() {
@@ -120,7 +120,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Client{" + "idClient=" + idClient + ", name=" + name + ", email=" + email + ", age=" + age + ", password=" + password + ", messages=" + messages + ", reservations=" + reservations + '}';
+        return "Client{" + "idClient=" + idClient + ", email=" + email + ", password=" + password + ", name=" + name + ", age=" + age + ", messages=" + messages + ", reservations=" + reservations + '}';
     }
-   
+
 }
