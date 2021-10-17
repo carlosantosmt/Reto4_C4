@@ -36,24 +36,24 @@ public class Message implements Serializable {
     private String messageText;
     
     @ManyToOne
-    @JoinColumn(name="idClient")
-    @JsonIgnoreProperties({"messages", "reservations"})
-    private Client client;
-    
-    @ManyToOne
     @JoinColumn(name="idCar")
     @JsonIgnoreProperties({"messages","reservations"})
     private Car car;
-
-    public Message(Integer idMessage, String messageText, Client client, Car car) {
-        this.idMessage = idMessage;
-        this.messageText = messageText;
-        this.client = client;
-        this.car = car;
-    }
+       
+    @ManyToOne
+    @JoinColumn(name="idClient")
+    @JsonIgnoreProperties({"messages", "reservations"})
+    private Client client;
 
     public Message() {
         super();
+    }
+
+    public Message(Integer idMessage, String messageText, Car car, Client client) {
+        this.idMessage = idMessage;
+        this.messageText = messageText;
+        this.car = car;
+        this.client = client;
     }
 
     public Integer getIdMessage() {
@@ -72,14 +72,6 @@ public class Message implements Serializable {
         this.messageText = messageText;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     public Car getCar() {
         return car;
     }
@@ -88,9 +80,17 @@ public class Message implements Serializable {
         this.car = car;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     @Override
     public String toString() {
-        return "Message{" + "idMessage=" + idMessage + ", messageText=" + messageText + ", client=" + client + ", car=" + car + '}';
+        return "Message{" + "idMessage=" + idMessage + ", messageText=" + messageText + ", car=" + car + ", client=" + client + '}';
     }
-   
+    
 }
