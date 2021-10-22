@@ -5,9 +5,7 @@
  */
 package co.usa.edu.spring.rentcar.service;
 
-import co.usa.edu.spring.rentcar.crudrepository.repository.CarRepository;
 import co.usa.edu.spring.rentcar.crudrepository.repository.MessageRepository;
-import co.usa.edu.spring.rentcar.model.Car;
 import co.usa.edu.spring.rentcar.model.Message;
 import java.util.List;
 import java.util.Optional;
@@ -44,5 +42,27 @@ public class MessageService {
             }
         }
         
+    }
+    
+    public Message updateMessage(Message msg){
+        if(msg.getIdMessage()!=null){
+            Optional<Message> msgOpt = messageRepository.getMessage(msg.getIdMessage());
+            if(msgOpt.isPresent()){
+                if(msg.getMessageText()!=null){
+                    msgOpt.get().setMessageText(msg.getMessageText());
+                }
+                return messageRepository.save(msgOpt.get());
+            }
+        }
+        return msg;
+    }
+    
+    public boolean deleteMessage(int id){
+        Optional<Message> msgOpt = getMessageById(id);
+        if(msgOpt.isPresent()){
+            messageRepository.delete(msgOpt.get());
+            return true;
+        }
+        return false;
     }
 }

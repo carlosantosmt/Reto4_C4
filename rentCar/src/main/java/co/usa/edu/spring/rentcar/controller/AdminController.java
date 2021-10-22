@@ -5,8 +5,8 @@
  */
 package co.usa.edu.spring.rentcar.controller;
 
-import co.usa.edu.spring.rentcar.model.Car;
-import co.usa.edu.spring.rentcar.service.CarService;
+import co.usa.edu.spring.rentcar.model.Admin;
+import co.usa.edu.spring.rentcar.service.AdminService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,45 +23,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
  *
  * @author CARLOS ANDRES
  */
 
 @RestController
-@RequestMapping("/api/Car")
+@RequestMapping("/api/Admin")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
-public class CarController {
+public class AdminController {
     
     @Autowired
-    private CarService carService;
-   
+    private AdminService adminService;
+    
     @GetMapping("/all")
-    public List<Car> getCars(){
-        return carService.getAllCars();
+    public List<Admin> getAdmins(){
+        return adminService.getAllAdmins();
     }
-  
+    
     @GetMapping("/{id}")
-    public Optional <Car> getCar(@PathVariable("id") int id){
-        return carService.getCarById(id);
+    public Optional<Admin> getAdmin(@PathVariable("id") int id ){
+        return adminService.getAdminById(id);
     }
     
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Car save(@RequestBody Car car){
-        return carService.saveCar(car);
+    public Admin save(@RequestBody Admin admin){
+        return adminService.saveAdmin(admin);
     }
     
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Car update(@RequestBody Car car){
-        return carService.updateCar(car);
+    public Admin update(@RequestBody Admin admin){
+        return adminService.updateAdm(admin);
     }
     
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean deleteCar(@PathVariable("id") int id){
-        return carService.deleteCar(id);
+    public boolean deleteAdmin(@PathVariable("id") int id){
+        return adminService.deleteAdmin(id);
     }
 }

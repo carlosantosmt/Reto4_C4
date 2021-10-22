@@ -42,6 +42,21 @@ public class ScoreService {
                 return score;
             }
         }
-        
+    }
+    
+     public Score updateScore(Score score){
+        if(score.getIdScore()!=null){
+            Optional<Score> scoreOpt = scoreRepository.getScore(score.getIdScore());
+            if(scoreOpt.isPresent()){
+                if(score.getScore()!=null){
+                    scoreOpt.get().setScore(score.getScore());
+                }
+                if(score.getMessage()!=null){
+                    scoreOpt.get().setMessage(score.getMessage());
+                }
+                return scoreRepository.save(scoreOpt.get());
+            }
+        }
+        return score;
     }
 }

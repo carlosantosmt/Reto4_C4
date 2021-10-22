@@ -39,7 +39,7 @@ public class Reservation implements Serializable {
     @Column(name = "devolutionDate")
     private Date devolutionDate;
     @Column
-    private String status = "created";
+    private String status;
     
     //@Column
     //private Date creationDate;
@@ -55,12 +55,6 @@ public class Reservation implements Serializable {
     @JsonIgnoreProperties({"reservations", "messages"})
     private Client client; 
     
-    /*
-    @ManyToOne
-    @JoinColumn(name = "idScore")
-    @JsonIgnoreProperties("reservations")
-    private Score score;
-    */
     @OneToOne(cascade = {CascadeType.REMOVE},mappedBy = "reservation")
     @JsonIgnoreProperties("reservation")
     private Score score;

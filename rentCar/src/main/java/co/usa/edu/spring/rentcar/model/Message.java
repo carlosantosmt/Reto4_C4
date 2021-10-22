@@ -7,6 +7,7 @@ package co.usa.edu.spring.rentcar.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,12 +36,12 @@ public class Message implements Serializable {
     @Column(nullable = false)
     private String messageText;
     
-    @ManyToOne
+    @ManyToOne 
     @JoinColumn(name="idCar")
     @JsonIgnoreProperties({"messages","reservations"})
     private Car car;
        
-    @ManyToOne
+    @ManyToOne 
     @JoinColumn(name="idClient")
     @JsonIgnoreProperties({"messages", "reservations"})
     private Client client;

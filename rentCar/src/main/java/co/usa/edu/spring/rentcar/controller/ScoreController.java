@@ -5,9 +5,7 @@
  */
 package co.usa.edu.spring.rentcar.controller;
 
-import co.usa.edu.spring.rentcar.model.Car;
 import co.usa.edu.spring.rentcar.model.Score;
-import co.usa.edu.spring.rentcar.service.CarService;
 import co.usa.edu.spring.rentcar.service.ScoreService;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,5 +51,10 @@ public class ScoreController {
         return scoreService.saveScore(score);
     }
     
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Score update(@RequestBody Score score){
+        return scoreService.updateScore(score);
+    }
     
 }

@@ -20,17 +20,21 @@ import org.springframework.stereotype.Repository;
 public class ScoreRepository {
     
     @Autowired
-    private ScoreInterface ScoreCrudRepository;
+    private ScoreInterface scoreCrudRepository;
     
     public List<Score> getAll(){
-        return (List<Score>) ScoreCrudRepository.findAll();
+        return (List<Score>) scoreCrudRepository.findAll();
     }
     
     public Optional<Score> getScore(int id){
-        return ScoreCrudRepository.findById(id);
+        return scoreCrudRepository.findById(id);
     }
     
     public Score save(Score newScore){
-        return ScoreCrudRepository.save(newScore);
+        return scoreCrudRepository.save(newScore);
+    }
+    
+    public void delete(Score delScore){
+        scoreCrudRepository.delete(delScore);
     }
 }

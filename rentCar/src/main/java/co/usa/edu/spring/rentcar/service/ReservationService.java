@@ -42,6 +42,33 @@ public class ReservationService {
                 return res;
             }
         }
-        
+    }
+    
+    public Reservation updateCar(Reservation res){
+        if(res.getIdReservation()!=null){
+            Optional<Reservation> resOpt = reservaRepository.getReservation(res.getIdReservation());
+            if(resOpt.isPresent()){
+                if(res.getStartDate()!=null){
+                    resOpt.get().setStartDate(res.getStartDate());
+                }
+                if(res.getDevolutionDate()!=null){
+                    resOpt.get().setDevolutionDate(res.getDevolutionDate());
+                }
+                if(res.getStatus()!=null){
+                    resOpt.get().setStatus(res.getStatus());
+                }
+                return reservaRepository.save(resOpt.get());
+            }
+        }
+        return res;
+    }
+    
+    public boolean deleteReservation(int id){
+        Optional<Reservation> resOpt = getReservationById(id);
+        if(resOpt.isPresent()){
+            reservaRepository.delete(resOpt.get());
+            return true;
+        }
+        return false;
     }
 }

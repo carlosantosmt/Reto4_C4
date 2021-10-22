@@ -33,7 +33,7 @@ public class Car implements Serializable {
  */
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(unique=true, nullable=false)
+@Column(unique = true, nullable = false)
 private Integer idCar;
 
 @Column(length = 45, nullable = false)

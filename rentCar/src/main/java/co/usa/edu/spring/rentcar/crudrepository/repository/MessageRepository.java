@@ -34,4 +34,8 @@ public class MessageRepository {
     public Message save(Message newMessage){
         return messageCrudRepository.save(newMessage);
     }
+    
+    public void delete(Message delMessage){
+        messageCrudRepository.delete(delMessage);
+    }
 }

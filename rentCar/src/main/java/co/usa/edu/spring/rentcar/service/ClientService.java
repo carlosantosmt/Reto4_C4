@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import co.usa.edu.spring.rentcar.crudrepository.repository.ClientRepository;
+import co.usa.edu.spring.rentcar.model.Car;
 
 
 /**
@@ -42,7 +43,37 @@ public class ClientService {
             }else{
                 return client;
             }
+        }   
+    }
+    
+    public Client updateClient(Client client){
+        if(client.getIdClient()!=null){
+            Optional<Client> clientOpt = clientRepository.getClient(client.getIdClient());
+            if(clientOpt.isPresent()){
+                if(client.getName()!=null){
+                    clientOpt.get().setName(client.getName());
+                }
+                if(client.getEmail()!=null){
+                    clientOpt.get().setEmail(client.getEmail());
+                }
+                if(client.getPassword()!=null){
+                    clientOpt.get().setPassword(client.getPassword());
+                }
+                if(client.getAge()!=null){
+                    clientOpt.get().setAge(client.getAge());
+                }
+                return clientRepository.save(clientOpt.get());
+            }
         }
-        
+        return client;
+    }
+    
+    public boolean deleteClient(int id){
+        Optional<Client> clientOpt = getClienById(id);
+        if(clientOpt.isPresent()){
+            clientRepository.delete(clientOpt.get());
+            return true;
+        }
+        return false;
     }
 }

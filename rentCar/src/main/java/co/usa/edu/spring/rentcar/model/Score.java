@@ -36,11 +36,7 @@ public class Score implements Serializable {
     private Integer score;
     @Column
     private String message;
-    /*
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "score")
-    @JsonIgnoreProperties("score")
-    public List<Reservation> reservations;
-    */
+    
     @OneToOne
     @JsonIgnoreProperties("score")
     private Reservation reservation;
