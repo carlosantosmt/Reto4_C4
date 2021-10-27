@@ -6,6 +6,8 @@
 package co.usa.edu.spring.rentcar.controller;
 
 import co.usa.edu.spring.rentcar.model.Reservation;
+import co.usa.edu.spring.rentcar.model.custom.CountClient;
+import co.usa.edu.spring.rentcar.model.custom.StatusAmount;
 import co.usa.edu.spring.rentcar.service.ReservationService;
 import java.util.List;
 import java.util.Optional;
@@ -63,4 +65,34 @@ public class ReservationController {
     public boolean deleteReservation(@PathVariable("id") int id){
         return reservService.deleteReservation(id);
     }
+    /*
+    @GetMapping("/report-dates/{startDate}/{devDate}")
+    public List<Reservation> getResByDateRange(@PathVariable("startDate") String startDate, @PathVariable("devDate") String devDate ) throws ParseException{
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = formater.parse(startDate);
+        Date end = formater.parse(devDate);
+        System.out.println("fecha_inicio:"+start+" "+"fecha_fin:"+end);
+        return reservService.getResevByDateRange(start, end);
+    }
+    
+  @GetMapping("/report-status")
+    public List<Object> getCountByStatus(){
+        return reservService.getBySatus();
+    }
+    */
+    @GetMapping("/report-dates/{startDate}/{endDate}")
+    public List<Reservation> getResvByDateRange(@PathVariable("startDate") String startDate, @PathVariable("endDate") String endDate){
+        return reservService.getResByDateRange(startDate, endDate);
+    }
+    
+    @GetMapping("/report-status")
+    public StatusAmount getStatusByConcept(){
+        return reservService.getStatusReport();
+    }
+    
+    @GetMapping("/report-clients")
+    public List<CountClient> getCountTopClients(){
+        return reservService.getTopReservClients();
+    }
+    
 }

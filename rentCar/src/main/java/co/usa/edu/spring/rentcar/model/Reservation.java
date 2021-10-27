@@ -30,7 +30,7 @@ public class Reservation implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique=true, nullable=false)
+    @Column(unique=true, nullable=false, name = "idReservation")
     private Integer idReservation;
     
     
