@@ -45,14 +45,13 @@ public class userController {
     /**
      * Mapeado de petición web Http de tipo POST para registrar un nuevo usuario
      * @param newUser objeto de tipo usuario que se debe enviar para su creación
-     * @return retorna el usuario creado 
+     * @return retorna un JSON de todos los usuarios creados
      */
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public User newUser(@RequestBody User newUser){
     return userService.newUser(newUser);
     }
-    
     /**
      * Mapeado para la verificación de email existente en la BD por medio de petición
      * web Http tipo GET
