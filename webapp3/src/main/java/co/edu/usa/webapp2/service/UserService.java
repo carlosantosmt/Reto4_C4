@@ -47,6 +47,12 @@ public class UserService {
                 if (user.getName() != null && user.getName().length() > 0) {
                     userOpt.get().setName(user.getName());
                 }
+                if (user.getBirthtDay()!= null) {
+                    userOpt.get().setBirthtDay(user.getBirthtDay());
+                }
+                if (user.getMonthBirthtDay()!= null && user.getMonthBirthtDay().length() > 0) {
+                    userOpt.get().setMonthBirthtDay(user.getMonthBirthtDay());
+                }
                 if (user.getAddress() != null && user.getAddress().length() > 0) {
                     userOpt.get().setAddress(user.getAddress());
                 }
@@ -79,7 +85,7 @@ public class UserService {
         if (user!=null){
             return user;
         }else{
-            User user2 = new User(null,null,null,null,null,null,null,null,null);
+            User user2 = new User(null,null,null,null,null,null,null,null,null,null,null);
             return user2; 
         } 
     }

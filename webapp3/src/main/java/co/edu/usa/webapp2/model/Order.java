@@ -5,6 +5,8 @@
  */
 package co.edu.usa.webapp2.model;
 
+import java.util.Date;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,21 +18,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author CARLOS ANDRES
  */
 
+@Document(collection = "orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "usuarios")
-public class User {
-
+public class Order {
+    public static String PENDING = "Pendiente";
+    public static String APROVED = "Aprobada";
+    public static String REJECTED = "Rechazado";
+    
     @Id
     private Integer id;
-    private String identification;
-    private String name;
-    private String address;
-    private String cellPhone;
-    private String email;
-    private String password;
-    private String zone;
-    private String type;
-
+    private Date registerDay;
+    private String status;
+    private User salesMan;
+    
+    private Map<String, Gadget> products;
+    private Map<String, Integer> quantities;
+    
 }

@@ -1,6 +1,7 @@
 package co.edu.usa.webapp2;
 
 import co.edu.usa.webapp2.crud.InterfaceGadget;
+import co.edu.usa.webapp2.crud.InterfaceOrder;
 import co.edu.usa.webapp2.crud.InterfaceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +19,8 @@ public class webapp2Application implements CommandLineRunner {
     private InterfaceUser interfaceUser;
     @Autowired
     private InterfaceGadget interfaceGadget;
+    @Autowired
+    private InterfaceOrder interfaceOrder;
 	public static void main(String[] args) {
 		SpringApplication.run(webapp2Application.class, args);
 	}
@@ -25,6 +28,7 @@ public class webapp2Application implements CommandLineRunner {
         public void run(String...args)throws Exception{
             interfaceUser.deleteAll();
             interfaceGadget.deleteAll();
+            interfaceOrder.deleteAll();
         }
         @Bean
         public WebMvcConfigurer corsConfigurer() {

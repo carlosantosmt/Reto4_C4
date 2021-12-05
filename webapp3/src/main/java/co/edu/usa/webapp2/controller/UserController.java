@@ -54,7 +54,11 @@ public class UserController {
     public void newUser(@RequestBody User newUser){
         userService.newUser(newUser);
     }
-    
+    /**
+     * Mapeado de petición web Http de tipo PUT para actualizar un usuario existente
+     * @param usuario objeto de tipo usuario con los atributos a actualizar
+     * @return es status afirmativo en caso de actualización
+     */
     @PutMapping("/update")
     //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity update(@RequestBody User usuario){
@@ -83,15 +87,23 @@ public class UserController {
     public User existUser(@PathVariable String email, @PathVariable String pass){
         return userService.validateUser(email, pass);
     }
-    
+    /**
+     * Mapeado de petición we Http tipo DELETE para borrar un usuario por id
+     * @param id del usuario que se desea eliminar
+     * @return  codigo de estatus dependiendo de si fu exitoso
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Integer id){
         userService.delete(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-    
+    /**
+     * Mapeado de petición web tipo Http GET para recuperar un usuario por id
+     * @param idUser del usuario que se desea recuperar
+     * @return un objeto tipo User 
+     */
      @GetMapping("/{id}")
-     public User getUser(@PathVariable("id") Integer id){
-         return userService.getUser(id);
+     public User getUser(@PathVariable("id") Integer idUser){
+         return userService.getUser(idUser);
      }
 }
