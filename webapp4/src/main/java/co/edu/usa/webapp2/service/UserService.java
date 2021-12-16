@@ -7,6 +7,7 @@ package co.edu.usa.webapp2.service;
 
 import co.edu.usa.webapp2.model.User;
 import co.edu.usa.webapp2.repository.UserRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +104,9 @@ public class UserService {
             return userOpt.get();
         }
         return null;
+    }
+    
+    public List<User> getUsersByMonth(String mes){
+        return userRepository.getUsersByMonth(mes);
     }
 }

@@ -5,7 +5,7 @@
  */
 package co.edu.usa.webapp2.crud;
 
-import co.edu.usa.webapp2.model.Order;
+import co.edu.usa.webapp2.model.Gadget;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -15,17 +15,14 @@ import org.springframework.data.mongodb.repository.Query;
  *
  * @author CARLOS ANDRES
  */
-
-public interface InterfaceOrder extends MongoRepository<Order, Integer>{
+public interface InterfaceGadget extends MongoRepository<Gadget, Integer> {
     
-    @Query("{id:?0}")
-    public Optional<Order> getdById(Integer id);
+    @Query("{id: ?0}")
+    public Optional<Gadget> getById(Integer id);
     
-    //public Optional<Order> findByDate(Date date);
+    @Query("{price: {$lte:?0}}")
+    public List<Gadget> findGadgetByPrice(Double price);
     
-    @Query("{'salesMan.zone':?0}")
-    public List<Order> findByZone(String zone);
-    
-    
-    
+    @Query("{description: {$regex: /?0/}}")
+    public List<Gadget> findGadgetByDescription(String text);
 }

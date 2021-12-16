@@ -83,4 +83,12 @@ public class GadgetService {
         }
         return null;
     }
+     
+    public List<Gadget> getGagdgetByPrice(Double price){
+        return repo.getGadgetByPrice(price);
+    }
+    
+    public List<Gadget> getGadetByDescription(String text){
+        return repo.getGadgetByDescription(text);
+    }
 }

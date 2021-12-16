@@ -38,8 +38,15 @@ public class GadgetRepository {
         return repo.getById(id);
     }
     
-    
     public void delete(Gadget gadget){
         repo.delete(gadget);
+    }
+    
+    public List<Gadget> getGadgetByPrice(Double price){
+        return repo.findGadgetByPrice(price);
+    }
+    
+    public List<Gadget> getGadgetByDescription(String text){
+        return repo.findGadgetByDescription(text);
     }
 }

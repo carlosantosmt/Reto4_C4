@@ -7,7 +7,12 @@ package co.edu.usa.webapp2.service;
 
 import co.edu.usa.webapp2.model.Order;
 import co.edu.usa.webapp2.repository.OrderRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,8 +73,8 @@ public class OrderService {
         return order;
     }
     
-    public List<Order> getBySalesman(String zone){
-        return repo.getBySalesman(zone);
+    public List<Order> getByZone(String zone){
+        return repo.getByZone(zone);
     }
     
     public Order getOrder(Integer id){
@@ -79,4 +84,25 @@ public class OrderService {
         }
         return null;
     }
+    
+    public List<Order> getBySalesman(Integer id){
+        return repo.getBySalesman(id);
+    }
+    
+    public List<Order> getByStatus(Integer id, String status){
+        return repo.getByStatus(id, status);
+    }
+    
+    public List<Order> getByDate(Integer id, String date){
+        SimpleDateFormat formater = new SimpleDateFormat("yyy-MM-dd");
+        Date fecha = new Date();
+        try{
+            fecha = formater.parse(date);
+            System.out.println(fecha);
+        }catch(ParseException err){
+            err.printStackTrace();
+        }
+        return repo.getByDate(id, fecha);
+    } 
 }
+

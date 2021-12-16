@@ -5,13 +5,14 @@
  */
 package co.edu.usa.webapp2.controller;
 
-import co.edu.usa.webapp2.model.Order;
-import co.edu.usa.webapp2.service.OrderService;
+import co.edu.usa.webapp2.model.Gadget;
+import co.edu.usa.webapp2.service.GadgetService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,38 +29,48 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/api/order")
+@RequestMapping("/api/gadget")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
-public class OrderController {
+public class GadgetController {
     
     @Autowired
-    private OrderService orderService;
+    private GadgetService service;
     
     @GetMapping("/all")
-    public List<Order> getOrders(){
-    return orderService.getAll();
+    public List<Gadget> getAll(){
+        return service.getAll();
     }
     
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
-    public void newOrder(@RequestBody Order newOrder){
-        orderService.save(newOrder);
+    public void save(@RequestBody Gadget gadget) {
+        service.save(gadget);
     }
     
-     @PutMapping("/update")
-    //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity update(@RequestBody Order order){
-        orderService.update(order);
-        return new ResponseEntity(HttpStatus.CREATED);
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void update(@RequestBody Gadget gadget){
+        service.update(gadget);
     }
     
-    @GetMapping("/zona/{zone}")
-    public List<Order> getOrdersByZone(@PathVariable("zone") String zone){
-        return orderService.getBySalesman(zone);
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") Integer id){
+        service.delete(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
     
     @GetMapping("/{id}")
-    public Order getOrderById(@PathVariable("id") Integer id ){
-        return orderService.getOrder(id);
+     public Gadget getGadget(@PathVariable("id") Integer id){
+         return service.getGadget(id);
+     }
+     
+    @GetMapping("/price/{price}")
+    public List<Gadget> getGadgetByPrice(@PathVariable("price") Double price){
+        return service.getGagdgetByPrice(price);
+    }
+    
+    @GetMapping("/description/{text}")
+    public List<Gadget> getGadgetByDescription(@PathVariable("text") String text){
+        return service.getGadetByDescription(text);
     }
 }

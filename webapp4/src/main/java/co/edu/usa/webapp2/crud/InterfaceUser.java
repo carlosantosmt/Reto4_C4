@@ -6,6 +6,7 @@
 package co.edu.usa.webapp2.crud;
 
 import co.edu.usa.webapp2.model.User;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -21,4 +22,7 @@ public interface InterfaceUser extends MongoRepository<User, Integer>{
     public User findByEmail(String email);
     public boolean existsByEmail(String email);
     public User findByEmailAndPassword (String email, String password);
+    
+    @Query("{monthBirthtDay: ?0}")
+    public List<User> findByMonthBirthtDay(String mes);
 }
